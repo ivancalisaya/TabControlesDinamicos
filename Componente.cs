@@ -14,7 +14,7 @@ namespace TabsDataSource
             NombreCol3Observaciones = "Observaciones/Medidas correctivas";
             NombreCol4Fecha = "Fecha";
             NombreCol5Nota = "Nota";
-            Estados = new List<EstadoAttr>();
+            //Estados = new List<EstadoAttr>();
             Lista = new List<FilaAttr>();
 
         }
@@ -26,7 +26,7 @@ namespace TabsDataSource
         public string NombreCol5Nota { get; set; }
 
         public List<FilaAttr> Lista { get; set; }
-        public List<EstadoAttr> Estados { get; set; }
+        //public List<EstadoAttr> Estados { get; set; }
        
 
     }

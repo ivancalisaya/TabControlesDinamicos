@@ -10,7 +10,7 @@ namespace TabsDataSource
         public FilaAttr()
         {
             Estado = new EstadoAttr();
-            //Estados = new List<EstadoAttr>();
+            Estados = new List<EstadoAttr>();
         }
 
         public int Id { get; set; }
@@ -22,7 +22,7 @@ namespace TabsDataSource
         public DateTime Fecha { get; set; }
 
         public double Nota { get; set; }
-        //public List<EstadoAttr> Estados { get; set; }
+        public List<EstadoAttr> Estados { get; set; }
 
 
     }

@@ -42,15 +42,15 @@ namespace TabsDataSource
                     
                     //tabControl1.Controls.Add(tab);
                     CrearTabYCabecera(tab, ListaDataSource[i]);
-                    CrearControles(tab, ListaDataSource[i]);
+                    CrearControles(i,tab, ListaDataSource[i]);
                 }
             }
         }
-        private void CrearControles(TabPage pTabPage, Componente pComponente) {
+        private void CrearControles(int pNroTab, TabPage pTabPage, Componente pComponente) {
 
 
             int oNroFilas = pComponente.Lista.Count;
-
+            
 
 
             Label[] Col1Labels = null;
@@ -60,8 +60,8 @@ namespace TabsDataSource
             Label[] Col5Labels=null;
 
             DeclararControlesFila(oNroFilas, ref Col1Labels, ref Col2Combos,ref Col3Textbox,ref Col4DtPicker,ref Col5Labels);
-            EstablecerCaracteristicasFila(oNroFilas, ref Col1Labels, ref Col2Combos, ref Col3Textbox, ref Col4DtPicker, ref Col5Labels);
-            CargarDatosAControles(pComponente, ref Col2Combos);
+            EstablecerCaracteristicasFila(pNroTab, oNroFilas, ref Col1Labels, ref Col2Combos, ref Col3Textbox, ref Col4DtPicker, ref Col5Labels);
+            CargarDatosAControles(pNroTab, pComponente, ref Col1Labels, ref Col2Combos);
             AgregarControlesATabPage(oNroFilas, ref pTabPage, ref Col1Labels, ref Col2Combos, ref Col3Textbox, ref Col4DtPicker, ref Col5Labels);
 
             
@@ -95,7 +95,7 @@ namespace TabsDataSource
 
         }
 
-        private void EstablecerCaracteristicasFila(int pNroFilas, ref Label[] pLabelCol1, ref ComboBox[] pCombosCol2,
+        private void EstablecerCaracteristicasFila(int pNroTab, int pNroFilas, ref Label[] pLabelCol1, ref ComboBox[] pCombosCol2,
             ref TextBox[] pTextCol3, ref DateTimePicker[] pDtPickerCol4, ref Label[] pLabelCol5) {
             int[] PosX = new int[] { 10, 172, 270, 535, 664 };
             int[] PosY = new int[] { 41, 41, 41, 41, 41 };
@@ -109,6 +109,7 @@ namespace TabsDataSource
                 pLabelCol1[i].BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
                 pLabelCol1[i].Text = "Label" + i.ToString();
                 pLabelCol1[i].Location = new Point(PosX[0], PosY[0]+NuevoY);
+                pLabelCol1[i].Name = string.Format("LblCriterio{0}{1}",pNroTab,i);
                 //combo de col2
                 pCombosCol2[i].Tag = i;
                 pCombosCol2[i].AutoSize = false;
@@ -116,12 +117,14 @@ namespace TabsDataSource
                 pCombosCol2[i].Height = 20;
                 pCombosCol2[i].DropDownStyle = ComboBoxStyle.DropDownList;
                 pCombosCol2[i].Location = new Point(PosX[1], PosY[1] + NuevoY);
+                pCombosCol2[i].Name = string.Format("CboEstado{0}{1}", pNroTab, i);
                 //textbox de col3
                 pTextCol3[i].Tag = i;
                 pTextCol3[i].AutoSize = false;
                 pTextCol3[i].Width = 260;
                 pTextCol3[i].Height = 20;
                 pTextCol3[i].Location = new Point(PosX[2], PosY[2] + NuevoY);
+                pTextCol3[i].Name = string.Format("TxtComentario{0}{1}", pNroTab, i);
                 //data picker de col4
                 pDtPickerCol4[i].Tag = i;
                 pDtPickerCol4[i].AutoSize = false;
@@ -129,6 +132,7 @@ namespace TabsDataSource
                 pDtPickerCol4[i].Height = 20;
                 pDtPickerCol4[i].Format = DateTimePickerFormat.Short;
                 pDtPickerCol4[i].Location = new Point(PosX[3], PosY[3] + NuevoY);
+                pDtPickerCol4[i].Name = string.Format("DtpFecha{0}{1}", pNroTab, i);
                 //label de Nota de col5
                 pLabelCol5[i].Tag = i;
                 pLabelCol5[i].AutoSize = false;
@@ -137,15 +141,31 @@ namespace TabsDataSource
                 pLabelCol5[i].BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
                 pLabelCol5[i].Text = "10.0" + i.ToString();
                 pLabelCol5[i].Location = new Point(PosX[4], PosY[4] + NuevoY);
+                pLabelCol5[i].Name = string.Format("LblNota{0}{1}", pNroTab, i);
 
 
                 NuevoY += 25;
             }
         }
 
-        private void CargarDatosAControles(Componente pComponente, ref ComboBox[] pCombosCol2) {
-            for (int i = 0; i < pCombosCol2.Length; i++) {
-                for (int j = 0; j < pComponente.Estados.Count; j++) {
+        private void CargarDatosAControles(int pNroTab, Componente pComponente,ref Label[] pCol1Labels, ref ComboBox[] pCol2Combos) {
+
+            for (int i = 0; i < pComponente.Lista.Count; i++) {
+                pCol1Labels[i].Text = pComponente.Lista[i].NombreAtributo;
+                for (int j = 0; j < pComponente.Lista[i].Estados.Count; j++) {
+                    pCol2Combos[i].Items.Add(new EstadoAttr() { Valor= pComponente.Lista[i].Estados[j].Valor, Nombre= pComponente.Lista[i].Estados[j].Nombre} );
+
+                }
+                pCol2Combos[i].ValueMember = "Valor"; pCol2Combos[i].DisplayMember = "Nombre";
+            }
+
+
+             
+
+
+            /*
+             for (int i = 0; i < pCombosCol2.Length; i++) {
+                for (int j = 0; j < pComponente.Lista[].Estados.Count; j++) {
                     pCombosCol2[i].Items.Add(new EstadoAttr(){Nombre=pComponente.Estados[j].Nombre , Valor= pComponente.Estados[j].Valor });
                     
                 }
@@ -154,7 +174,7 @@ namespace TabsDataSource
                 pCombosCol2[i].ValueMember = "Valor";
 
             }
-
+            */
 
         }
         private void AgregarControlesATabPage(int pNroFilas, ref TabPage pTabPagex,  ref Label[] pLabelCol1, ref ComboBox[] pCombosCol2,

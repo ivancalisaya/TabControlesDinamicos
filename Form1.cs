@@ -20,6 +20,13 @@ namespace TabsDataSource
         {
             List<Componente> componentes = new List<Componente>();
 
+            List<EstadoAttr> estados = new List<EstadoAttr>
+            {
+                new EstadoAttr() { Valor = 1, Nombre = "Si cumple parcialmente" },
+                new EstadoAttr() { Valor = 2, Nombre = "No Cumple" },
+                new EstadoAttr() { Valor = 3, Nombre = "Cumple" }
+            };
+
             for (int t = 0; t <3; t++)
             {
                 Componente componente = new Componente();
@@ -30,12 +37,11 @@ namespace TabsDataSource
                 componente.NombreCol5Nota = "NOTA" + t.ToString();
                 componente.NombrePestana = "Pestaña"+t.ToString();
                 
-                componente.Estados.Add(new EstadoAttr() { Nombre = "Cumple", Valor = 10 });
-                componente.Estados.Add(new EstadoAttr() { Nombre = "Si cumple parcialmente", Valor = 11 });
-                componente.Estados.Add(new EstadoAttr() { Nombre = "No Cumple", Valor = 12 });
-
-                for (int i = 0; i <= 10; i++) { 
-                    FilaAttr filaAttr = new FilaAttr() { Id=i, NombreAtributo="Tablero de indicadores actualizado"+i.ToString(), Estado= new EstadoAttr() , Fecha= DateTime.Now, Observacion="ninguna", Nota=10.50+i };
+                for (int i = 0; i <= 10; i++) {
+                    FilaAttr filaAttr = new FilaAttr() { Id = i, NombreAtributo = "Tablero de indicadores" + i.ToString(), Estado = new EstadoAttr(), Estados = new List<EstadoAttr>() , Fecha= DateTime.Now, Observacion="ninguna", Nota=10.50+i };
+                    for (int j = 0; j < estados.Count; j++) {
+                        filaAttr.Estados.Add(estados[j]);
+                    }
                     componente.Lista.Add(filaAttr);
                 }
                 componentes.Add(componente);
