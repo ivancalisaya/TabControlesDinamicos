@@ -328,7 +328,7 @@ namespace TabsDataSource
             //MessageBox.Show(((TabsDataSource.EstadoAttr)(cbo.SelectedItem)).Valor.ToString());
             string correlativoCtl = cbo.Name.Substring(9, cbo.Name.Length - 9);
             int tabTag = Convert.ToInt32( cbo.Tag.ToString().Split('-')[0]);
-            var lblNota = (Label)tabControl1.TabPages[tabTag+1].Controls["LblNota"+correlativoCtl];
+            var lblNota = (Label)tabControl1.TabPages[tabTag+0].Controls["LblNota"+correlativoCtl];
             lblNota.Text = ((TabsDataSource.EstadoAttr)cbo.SelectedItem).Valor.ToString();
 
         }

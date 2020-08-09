@@ -38,7 +38,7 @@ namespace TabsDataSource
                 componente.NombrePestana = "Pestaña"+t.ToString();
                 
                 for (int i = 0; i <= 10; i++) {
-                    FilaAttr filaAttr = new FilaAttr() { Id = i, NombreAtributo = "Tablero de indicadores" + i.ToString(), Estado = new EstadoAttr(), Estados = new List<EstadoAttr>() , Fecha= DateTime.Now, Observacion="ninguna", Nota=10.50+i };
+                    FilaAttr filaAttr = new FilaAttr() { Id = i, NombreAtributo = "Tablero de indicadores" + i.ToString(), Estado = new EstadoAttr(), Estados = new List<EstadoAttr>() , Fecha= DateTime.Now, Observacion="ninguna", Nota=0+i };
                     for (int j = 0; j < estados.Count; j++) {
                         filaAttr.Estados.Add(estados[j]);
                     }

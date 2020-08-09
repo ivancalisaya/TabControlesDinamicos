@@ -5,12 +5,12 @@ using System.Text;
 
 namespace TabsDataSource
 {
-    public class FilaAttr
+    public class FilaAttr 
     {
         public FilaAttr()
         {
             Estado = new EstadoAttr();
-            Estados = new List<EstadoAttr>();
+             Estados = new List<EstadoAttr>();
         }
 
         public int Id { get; set; }
