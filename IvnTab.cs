@@ -39,7 +39,7 @@ namespace TabsDataSource
             if (ListaDataSource.Count > 0) {
                 for (int i = 0; i < ListaDataSource.Count; i++) { 
                     TabPage tab = new TabPage();
-                    
+                    tab.Tag = i;
                     //tabControl1.Controls.Add(tab);
                     CrearTabYCabecera(tab, ListaDataSource[i]);
                     CrearControles(i,tab, ListaDataSource[i]);
@@ -102,7 +102,7 @@ namespace TabsDataSource
             int NuevoY = 0;
             for (int i = 0; i < pNroFilas; i++) {
                 //label de col1
-                pLabelCol1[i].Tag = i;
+                pLabelCol1[i].Tag = (string.Format("{0}-{1}",pNroTab,i));
                 pLabelCol1[i].AutoSize = false;
                 pLabelCol1[i].Width = 157;
                 pLabelCol1[i].Height = 20;
@@ -111,22 +111,23 @@ namespace TabsDataSource
                 pLabelCol1[i].Location = new Point(PosX[0], PosY[0]+NuevoY);
                 pLabelCol1[i].Name = string.Format("LblCriterio{0}{1}",pNroTab,i);
                 //combo de col2
-                pCombosCol2[i].Tag = i;
+                pCombosCol2[i].Tag = (string.Format("{0}-{1}",pNroTab,i));
                 pCombosCol2[i].AutoSize = false;
                 pCombosCol2[i].Width = 90;
                 pCombosCol2[i].Height = 20;
                 pCombosCol2[i].DropDownStyle = ComboBoxStyle.DropDownList;
                 pCombosCol2[i].Location = new Point(PosX[1], PosY[1] + NuevoY);
                 pCombosCol2[i].Name = string.Format("CboEstado{0}{1}", pNroTab, i);
+                pCombosCol2[i].SelectionChangeCommitted += ComboEstadoChangeCommitted;
                 //textbox de col3
-                pTextCol3[i].Tag = i;
+                pTextCol3[i].Tag = (string.Format("{0}-{1}",pNroTab,i));
                 pTextCol3[i].AutoSize = false;
                 pTextCol3[i].Width = 260;
                 pTextCol3[i].Height = 20;
                 pTextCol3[i].Location = new Point(PosX[2], PosY[2] + NuevoY);
                 pTextCol3[i].Name = string.Format("TxtComentario{0}{1}", pNroTab, i);
                 //data picker de col4
-                pDtPickerCol4[i].Tag = i;
+                pDtPickerCol4[i].Tag = (string.Format("{0}-{1}",pNroTab,i));
                 pDtPickerCol4[i].AutoSize = false;
                 pDtPickerCol4[i].Width = 123;
                 pDtPickerCol4[i].Height = 20;
@@ -134,7 +135,7 @@ namespace TabsDataSource
                 pDtPickerCol4[i].Location = new Point(PosX[3], PosY[3] + NuevoY);
                 pDtPickerCol4[i].Name = string.Format("DtpFecha{0}{1}", pNroTab, i);
                 //label de Nota de col5
-                pLabelCol5[i].Tag = i;
+                pLabelCol5[i].Tag = (string.Format("{0}-{1}",pNroTab,i));
                 pLabelCol5[i].AutoSize = false;
                 pLabelCol5[i].Width = 40;
                 pLabelCol5[i].Height = 20;
@@ -147,6 +148,8 @@ namespace TabsDataSource
                 NuevoY += 25;
             }
         }
+
+       
 
         private void CargarDatosAControles(int pNroTab, Componente pComponente,ref Label[] pCol1Labels, ref ComboBox[] pCol2Combos) {
 
@@ -213,7 +216,7 @@ namespace TabsDataSource
                 Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0))),
                 ForeColor = Color.White,
                 Location = new Point(3, 10),
-                Name = "label1",
+                Name = "labelTb1" + pTab.Tag,
                 Size = new Size(152, 13),
                 TabIndex = 1,
                 Text = pComponente.NombreCol1Atributo,
@@ -228,7 +231,7 @@ namespace TabsDataSource
                 Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0))),
                 ForeColor = Color.White,
                 Location = new Point(187, 10),
-                Name = "label2",
+                Name = "labelTb2" + pTab.Tag,
                 Size = new Size(51, 13),
                 TabIndex = 5,
                 Text = pComponente.NombreCol2Estado
@@ -239,7 +242,7 @@ namespace TabsDataSource
                 Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0))),
                 ForeColor = Color.White,
                 Location = new Point(264, 10),
-                Name = "label3",
+                Name = "labelTb3" + pTab.Tag,
                 Size = new Size(237, 13),
                 TabIndex = 2,
                 Text = pComponente.NombreCol3Observaciones
@@ -250,7 +253,7 @@ namespace TabsDataSource
                 Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0))),
                 ForeColor = Color.White,
                 Location = new Point(553, 10),
-                Name = "label4",
+                Name = "labelTb4" + pTab.Tag,
                 Size = new Size(42, 13),
                 TabIndex = 4,
                 Text = pComponente.NombreCol4Fecha
@@ -261,7 +264,7 @@ namespace TabsDataSource
                 Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0))),
                 ForeColor = Color.White,
                 Location = new Point(659, 10),
-                Name = "label5",
+                Name = "labelTb5" + pTab.Tag,
                 Size = new Size(37, 13),
                 TabIndex = 3,
                 Text = pComponente.NombreCol5Nota
@@ -272,7 +275,7 @@ namespace TabsDataSource
                 BackColor =  Color.SlateGray,
                 Dock = DockStyle.Top,
                 Location = new Point(3, 3),
-                Name = "panel1",
+                Name = "panelTb1" + pTab.Tag,
                 Size = new Size(717, 32),
                 TabIndex = 0
             };
@@ -315,5 +318,20 @@ namespace TabsDataSource
 
         }
 
+
+        private void ComboEstadoChangeCommitted(Object sender, System.EventArgs e) {
+            ComboBox cbo = new ComboBox();
+            cbo = (ComboBox)sender;
+            //MessageBox.Show(cbo.Name);
+            //MessageBox.Show(cbo.Tag.ToString());
+            //MessageBox.Show(((TabsDataSource.EstadoAttr)((object)cbo.SelectedItem)).Nombre.ToString());
+            //MessageBox.Show(((TabsDataSource.EstadoAttr)(cbo.SelectedItem)).Valor.ToString());
+            string correlativoCtl = cbo.Name.Substring(9, cbo.Name.Length - 9);
+            int tabTag = Convert.ToInt32( cbo.Tag.ToString().Split('-')[0]);
+            var lblNota = (Label)tabControl1.TabPages[tabTag+1].Controls["LblNota"+correlativoCtl];
+            lblNota.Text = ((TabsDataSource.EstadoAttr)cbo.SelectedItem).Valor.ToString();
+
+        }
+         
     }
 }
