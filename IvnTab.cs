@@ -23,7 +23,7 @@ namespace TabsDataSource
             //llenarTabs();
             //CrearControles();
             //CrearCabecera();
-            //ListaDataSource = new List<Componente>();
+            ListaDataSource = new List<Componente>();
         }
 
         public IvnTab(List<Componente> pDataSource)
@@ -61,7 +61,7 @@ namespace TabsDataSource
 
             DeclararControlesFila(oNroFilas, ref Col1Labels, ref Col2Combos,ref Col3Textbox,ref Col4DtPicker,ref Col5Labels);
             EstablecerCaracteristicasFila(pNroTab, oNroFilas, ref Col1Labels, ref Col2Combos, ref Col3Textbox, ref Col4DtPicker, ref Col5Labels);
-            CargarDatosAControles(pNroTab, pComponente, ref Col1Labels, ref Col2Combos);
+            CargarDatosAControles(pNroTab, pComponente, ref Col1Labels, ref Col2Combos, ref Col3Textbox, ref Col4DtPicker, ref Col5Labels);
             AgregarControlesATabPage(oNroFilas, ref pTabPage, ref Col1Labels, ref Col2Combos, ref Col3Textbox, ref Col4DtPicker, ref Col5Labels);
 
             
@@ -126,6 +126,7 @@ namespace TabsDataSource
                 pTextCol3[i].Height = 20;
                 pTextCol3[i].Location = new Point(PosX[2], PosY[2] + NuevoY);
                 pTextCol3[i].Name = string.Format("TxtComentario{0}{1}", pNroTab, i);
+                pTextCol3[i].TextChanged += TextComentario_TextChanged;
                 //data picker de col4
                 pDtPickerCol4[i].Tag = (string.Format("{0}-{1}",pNroTab,i));
                 pDtPickerCol4[i].AutoSize = false;
@@ -149,17 +150,25 @@ namespace TabsDataSource
             }
         }
 
-       
+        
 
-        private void CargarDatosAControles(int pNroTab, Componente pComponente,ref Label[] pCol1Labels, ref ComboBox[] pCol2Combos) {
+        private void CargarDatosAControles(int pNroTab, Componente pComponente,ref Label[] pCol1Labels, ref ComboBox[] pCol2Combos, ref TextBox[] pCol3Textboxes, ref DateTimePicker[] pCol4DtPickers, ref Label[] pCol5Labels) {
 
             for (int i = 0; i < pComponente.Lista.Count; i++) {
+                
                 pCol1Labels[i].Text = pComponente.Lista[i].NombreAtributo;
+                
                 for (int j = 0; j < pComponente.Lista[i].Estados.Count; j++) {
                     pCol2Combos[i].Items.Add(new EstadoAttr() { Valor= pComponente.Lista[i].Estados[j].Valor, Nombre= pComponente.Lista[i].Estados[j].Nombre} );
 
                 }
                 pCol2Combos[i].ValueMember = "Valor"; pCol2Combos[i].DisplayMember = "Nombre";
+
+                pCol3Textboxes[i].Text = pComponente.Lista[i].Observacion;
+                pCol4DtPickers[i].Value = pComponente.Lista[i].Fecha;
+                pCol5Labels[i].Text = pComponente.Lista[i].Nota.ToString();
+
+                
             }
 
 
@@ -320,18 +329,37 @@ namespace TabsDataSource
 
 
         private void ComboEstadoChangeCommitted(Object sender, System.EventArgs e) {
-            ComboBox cbo = new ComboBox();
-            cbo = (ComboBox)sender;
-            //MessageBox.Show(cbo.Name);
-            //MessageBox.Show(cbo.Tag.ToString());
-            //MessageBox.Show(((TabsDataSource.EstadoAttr)((object)cbo.SelectedItem)).Nombre.ToString());
-            //MessageBox.Show(((TabsDataSource.EstadoAttr)(cbo.SelectedItem)).Valor.ToString());
-            string correlativoCtl = cbo.Name.Substring(9, cbo.Name.Length - 9);
-            int tabTag = Convert.ToInt32( cbo.Tag.ToString().Split('-')[0]);
-            var lblNota = (Label)tabControl1.TabPages[tabTag+0].Controls["LblNota"+correlativoCtl];
-            lblNota.Text = ((TabsDataSource.EstadoAttr)cbo.SelectedItem).Valor.ToString();
+            //_ = new ComboBox();
+            //ComboBox cbo = (ComboBox)sender;
+            string correlativoCtl = ((ComboBox)sender).Name.Substring(9, ((ComboBox)sender).Name.Length - 9);
+            int tabTag = Convert.ToInt32(((ComboBox)sender).Tag.ToString().Split('-')[0]);
+            int indextag= Convert.ToInt32(((ComboBox)sender).Tag.ToString().Split('-')[1]);
+            var lblNota = (Label)tabControl1.TabPages[tabTag].Controls["LblNota" + correlativoCtl];
+            lblNota.Text = ((TabsDataSource.EstadoAttr)((ComboBox)sender).SelectedItem).Valor.ToString();
+
+            ListaDataSource[tabTag].Lista[indextag].Estado.Nombre = ((TabsDataSource.EstadoAttr)((ComboBox)sender).SelectedItem).Nombre;
+            ListaDataSource[tabTag].Lista[indextag].Estado.Valor = ((TabsDataSource.EstadoAttr)((ComboBox)sender).SelectedItem).Valor;
+            //ListaDataSource[tabTag].Lista[indextag].Estado.Nota = ((TabsDataSource.EstadoAttr)cbo.SelectedItem).Nota;
+
+            //var ddd = ListaDataSource;
 
         }
-         
+
+        private void TextComentario_TextChanged(object sender, EventArgs e)
+        {
+
+            int tabTag = Convert.ToInt32( ((TextBox)sender).Tag.ToString().Split('-')[0]);
+            int indextag = Convert.ToInt32( ((TextBox)sender).Tag.ToString().Split('-')[1]);
+            ListaDataSource[tabTag].Lista[indextag].Observacion = ((TextBox)sender).Text;
+
+            var ddd = ListaDataSource;
+        }
+
+        public List<Componente> ObtenerDatos() {
+             
+            return ListaDataSource;
+
+        }
+
     }
 }

@@ -50,5 +50,20 @@ namespace TabsDataSource
             ivnTab1.ListaDataSource = componentes;
             ivnTab1.DataBind();
         }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            MessageBox.Show("textBox1_TextChanged");
+        }
+
+        private void textBox1_Validated(object sender, EventArgs e)
+        {
+            MessageBox.Show("textBox1_Validated");
+        }
+
+        private void textBox1_Validating(object sender, CancelEventArgs e)
+        {
+            MessageBox.Show("textBox1_Validating");
+        }
     }
 }
