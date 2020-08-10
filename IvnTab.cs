@@ -352,7 +352,7 @@ namespace TabsDataSource
             int indextag = Convert.ToInt32( ((TextBox)sender).Tag.ToString().Split('-')[1]);
             ListaDataSource[tabTag].Lista[indextag].Observacion = ((TextBox)sender).Text;
 
-            var ddd = ListaDataSource;
+            //var ddd = ListaDataSource;
         }
 
         public List<Componente> ObtenerDatos() {

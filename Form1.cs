@@ -49,6 +49,7 @@ namespace TabsDataSource
 
             ivnTab1.ListaDataSource = componentes;
             ivnTab1.DataBind();
+            
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
