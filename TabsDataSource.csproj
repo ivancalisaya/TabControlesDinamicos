@@ -52,11 +52,11 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="IvnTab.cs">
+    <Compile Include="IVTab.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="IvnTab.Designer.cs">
-      <DependentUpon>IvnTab.cs</DependentUpon>
+    <Compile Include="IVTab.Designer.cs">
+      <DependentUpon>IVTab.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -64,8 +64,8 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="IvnTab.resx">
-      <DependentUpon>IvnTab.cs</DependentUpon>
+    <EmbeddedResource Include="IVTab.resx">
+      <DependentUpon>IVTab.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -1,6 +1,6 @@
 ﻿namespace TabsDataSource
 {
-    partial class IvnTab
+    partial class IVTab
     {
         /// <summary> 
         /// Variable del diseñador necesaria.
@@ -33,19 +33,19 @@
             // 
             // tabControl1
             // 
-            this.tabControl1.Location = new System.Drawing.Point(14, 19);
+            this.tabControl1.Location = new System.Drawing.Point(4, 4);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(731, 313);
             this.tabControl1.TabIndex = 0;
             // 
-            // IvnTab
+            // IVTab
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tabControl1);
-            this.Name = "IvnTab";
-            this.Size = new System.Drawing.Size(769, 344);
+            this.Name = "IVTab";
+            this.Size = new System.Drawing.Size(736, 320);
             this.ResumeLayout(false);
 
         }

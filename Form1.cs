@@ -22,12 +22,12 @@ namespace TabsDataSource
 
             List<EstadoAttr> estados = new List<EstadoAttr>
             {
-                new EstadoAttr() { Valor = 1, Nombre = "Si cumple parcialmente" },
-                new EstadoAttr() { Valor = 2, Nombre = "No Cumple" },
-                new EstadoAttr() { Valor = 3, Nombre = "Cumple" }
+                new EstadoAttr() { Valor = 1, Nombre = "Si cumple parcialmente", Nota=11 },
+                new EstadoAttr() { Valor = 2, Nombre = "No Cumple", Nota=12 },
+                new EstadoAttr() { Valor = 3, Nombre = "Cumple", Nota=13 }
             };
 
-            for (int t = 0; t <3; t++)
+            for (int t = 0; t <5; t++)
             {
                 Componente componente = new Componente();
                 componente.NombreCol1Atributo = "controles comercialesXX"+t.ToString();
@@ -44,27 +44,26 @@ namespace TabsDataSource
                     }
                     componente.Lista.Add(filaAttr);
                 }
+                ///componente.VisibleCol5Nota = false;
+                componente.VisibleCol3Observaciones = (t % 2 == 0);
                 componentes.Add(componente);
+                
             }
-
-            ivnTab1.ListaDataSource = componentes;
-            ivnTab1.DataBind();
+             
+            MiTabcito1.ListaDataSource = componentes;
+            MiTabcito1.ColorCabecera = Color.ForestGreen;
+            MiTabcito1.DataBind();
+            
             
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-            MessageBox.Show("textBox1_TextChanged");
-        }
+         
 
-        private void textBox1_Validated(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("textBox1_Validated");
-        }
+            //e MessageBox.Show(  MiTabcito1.ListaDataSource[0].ObtenerSumatoriaNotasSeleccionadas().ToString());
+            var gg = MiTabcito1.ListaValoresNotas();
 
-        private void textBox1_Validating(object sender, CancelEventArgs e)
-        {
-            MessageBox.Show("textBox1_Validating");
         }
     }
 }

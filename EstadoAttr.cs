@@ -9,7 +9,7 @@ namespace TabsDataSource
     {
         public string Nombre{get; set;}
         public int Valor { get; set; }
-        public string Nota { get; set; }
+        public Double Nota { get; set; }
 
     }
 }
