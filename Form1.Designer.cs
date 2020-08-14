@@ -35,16 +35,16 @@
             // MiTabcito1
             // 
             this.MiTabcito1.ColorCabecera = System.Drawing.Color.SlateGray;
-            this.MiTabcito1.Location = new System.Drawing.Point(12, 104);
+            this.MiTabcito1.Location = new System.Drawing.Point(12, 12);
             this.MiTabcito1.Name = "MiTabcito1";
             this.MiTabcito1.Size = new System.Drawing.Size(738, 321);
             this.MiTabcito1.TabIndex = 0;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(120, 476);
+            this.button1.Location = new System.Drawing.Point(254, 353);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(195, 66);
             this.button1.TabIndex = 1;
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
@@ -54,7 +54,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1290, 698);
+            this.ClientSize = new System.Drawing.Size(763, 436);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.MiTabcito1);
             this.Name = "Form1";

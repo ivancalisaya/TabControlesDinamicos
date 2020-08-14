@@ -46,6 +46,7 @@ namespace TabsDataSource
             ColorCabecera = Color.SlateGray;
         }
         public void DataBind() {
+            tabControl1.TabPages.Clear();
             if (ListaDataSource.Count > 0) {
                 for (int i = 0; i < ListaDataSource.Count; i++) {
                     TabPage tab = new TabPage

@@ -10,7 +10,8 @@ namespace TabsDataSource
         public FilaAttr()
         {
             Estado = new EstadoAttr();
-             Estados = new List<EstadoAttr>();
+            Estados = new List<EstadoAttr>();
+
         }
 
         public int Id { get; set; }
